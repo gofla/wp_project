@@ -1,0 +1,45 @@
+form#form-task.form-inline(class='rooms')
+  .form
+    .main
+      input(type='text', id='content', name='content', placeholder='어디에 얼마동안 머무를 예정인가요?(예: 장소 / YY.MM.DD-YY.MM.DD)')
+    .sub
+      .form-group
+        select.form-control(name='category')
+          option(value='여행자') 여행자
+          option(value='호스트') 호스트
+      .form-group
+        select.form-control(name='people')
+          option(value='6') 인원 5명 이상
+          option(value='5') 인원 5명
+          option(value='4') 인원 4명
+          option(value='3') 인원 3명
+          option(value='2') 인원 2명
+          option(value='1') 인원 1명
+  .actions
+      button#post-task.btn.btn-primary.btn-lg.btn-block(type='button') 저장
+
+ul.tasks
+
+.no-task 
+  .alert.alert-info Task가 없습니다.
+script#task-template(type='text/template').
+  <li class='task <%= doneStr %>' data-id='<%= id %>'>
+    <span class='check'>
+      <i class='fa fa-check fa-lg'></i>
+    </span>
+    <span class='content'><%=content %></span>
+    <% if (category) { %>
+      <span class='label label-default category'> 
+        <%= category %>
+      </span>
+    <% } %>
+    <span class='people p<%= people %>'>
+      <%= (people === 3) ? "인원 3명" : (people === 1) ? "인원 1명": (people === 2) ? "인원 2명" : (people === 4) ? "인원 4명": (people === 5) ? "인원 5명": "인원 6명" %>
+    </span>
+    <a href='#' class='remove'><i class='fa fa-trash-o'></i></a>
+  </li>
+      
+script.
+  $(function() {
+    var room = new TaskController();    
+  });

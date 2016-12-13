@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  #main.container.loading
+    .row
+      .col-sm-9
+        include ./includes/room-main
+      .col-sm-3.side
+        include ./includes/room-side
+    .spinner
+      .background
+      .foreground
+        p
+          i.fa.fa-circle-o-notch.fa-spin.fa-4x
+        p Loading...
+  script(src='/bower_components/socket.io-client/socket.io.js')
+  script(type='text/javascript', src='/javascripts/rooms.js')
